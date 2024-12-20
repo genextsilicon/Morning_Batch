@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let task = () => {
+          
+            function num() {
+                let a = prompt("Enter the 1st value :") * 1;
+                return a;
+            }
+            function num1() {
+                let b = prompt("Enter the 2nd value :") * 1;
+                return b;
+            }
+        
+        
+
+            let opr = prompt("Choose accordingly: a-pattern, b-greater/smaller");
+
+            switch (opr) {
+                case "a":
+                    console.log("A Called")
+                    let a = num();
+                    // let b = num1();
+                    let i = 1;
+                    for (i = 1; i <= a; i++) {
+                        let j = 1;
+                        for (j = 1; j <= i; j++) {
+                            document.write("*" );
+                        }
+                        document.write("<br>");
+                    }
+                    break;
+
+                case "b":
+                    console.log("B Called")
+                   let c = num();
+                    let d = num1();
+                    if(c>d){
+                        document.write(c + " is greater");
+                    }
+                    else if(d>c){
+                        document.write(d + " is greater");
+                    }
+                    else{
+                        document.write("both are equal");
+                    }
+                
+            }
+        }
+        task();
+    </script>
+</body>
+
+</html>

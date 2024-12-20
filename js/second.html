@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation</title>
+</head>
+
+<body>
+
+    <form action="">
+        <label for="">Enter Name</label>
+        <input type="text" name="" id="uname" onblur="Validate_name()"> <span id="uname_span"
+            style=" color: red; display: none;">&nbsp;&nbsp;&nbsp;Invalid Name</span> <br><br>
+
+        <label for="">Enter Email</label>
+        <input type="text" name="" id="uemail" onblur="Validate_email()"> <span id="uemail_span"
+            style=" color: red; display: none;">&nbsp;&nbsp;&nbsp;Invalid Email</span> <br><br>
+
+
+        <label for="">Contact Number</label>
+        <input type="text" name="" id="unum" onblur="Validate_contact()"><span id="unum_span"
+            style=" color: red; display: none;">&nbsp;&nbsp;&nbsp;Invalid Number</span> <br><br>
+
+
+        <label for="">Password</label>
+        <input type="password" name="" id="password" onblur="Validate_password()"><span id="password_span"
+            style=" color: red; display: none;">&nbsp;&nbsp;&nbsp;Invalid Password</span><br><br>
+
+
+        <label for="">Conform Password</label>
+        <input type="password" name="" id="c_password" onblur="Validate_cpassword()"><span id="c_password_span"
+            style=" color: red; display: none;">&nbsp;&nbsp;&nbsp;Invalid Password</span><br><br>
+
+        <button type="submit">Submit Form </button>
+        <button type="reset">Reset Form</button>
+    </form>
+
+
+
+    <script>
+        let Validate_name = () => {
+            let uname = document.getElementById("uname").value;
+            console.log(uname)
+            //   uname= trim(uname);
+            for (i = 0; i < uname.length; i++) {
+                if (uname[i] >= "A" && uname[i] <= "Z" || uname[i] >= "a" && uname[i] <= "z" || uname[i] == " ") {
+                    // alert(uname[i]);
+                }
+                else {
+                    document.getElementById("uname_span").style.display = "inline";
+                    break;
+                }
+            }
+        }
+        let Validate_contact = () => {
+            let unum = document.getElementById("unum").value;
+            let len = unum.length;
+            if (len == 10) {
+                // alert("Valid");
+                for (let i = 0; i < unum.length; i++) {
+                    if (unum[i] >= "A" && unum[i] <= "Z" || unum[i] >= "a" && unum[i] <= "z" || unum[i] == " ") {
+                        // console.log("Invaild contact");
+                        document.getElementById("unum_span").style.display = "inline";
+                    }
+                    else {
+                        // console.log("Valid Contact");
+                    }
+                }
+            }
+
+            else {
+                document.getElementById("unum_span").style.display = "inline";
+            }
+        }
+        let Validate_password = () => {
+            let count = 0;
+            const pass = document.getElementById("password").value;
+            if (pass.length >= 8 && pass.length <= 16) {
+                console.log("Correct Length")
+                for (var i = 0; i < pass.length; i++) {
+                    if (pass[i] >= "A" && pass[i] <= "Z" && pass[i] != " ") {
+                        console.log("Correct Upper Case without space")
+                        for (var i = 0; i < pass.length; i++) {
+                            if (pass[i] >= "a" && pass[i] <= "z") {
+                                console.log("Correct Lower Case");
+                                for (i = 0; i < pass.length; i++) {
+                                    if (pass[i] == "!" || pass[i] == "@" || pass[i] == "&" || pass[i] == "$" || pass[i] == "^" || pass[i] == "%" || pass[i] == "*" || pass[i] == "#") {
+                                        console.log("Special Character Found ")
+                                        for (i = 0; i < pass.length; i++) {
+                                            if (pass[i] >= "0" && pass[i] <= "9") {
+                                                console.log("Number Found ")
+                                                count = 10;
+                                                break;
+                                            }
+                                            else {
+                                                console.log("Number  Missing");
+                                                count = 0;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        console.log("Special Character Missing");
+                                    }
+                                }
+                            }
+                            else {
+                                console.log("Lower Case Missing Invalid")
+                            }
+                        }
+                    }
+                    else {
+                        console.log("upper Case Missing and have space")
+                    }
+                }
+            }
+            else {
+                console.log("Length Invalid")
+            }
+            if (count == 10) {
+                document.getElementById("password_span").style.display = "none";
+            }
+            else {
+                document.getElementById("password_span").style.display = "inline";
+            }
+        }
+
+
+        // let Validate_password = () => {
+
+        //     const strength = {
+        //         1: "very Weak",
+        //         2: "Weak",
+        //         3: "Meduim",
+        //         4: "Strong",
+        //     };
+
+        //     let pass = document.getElementById("password").value;
+
+        //     if (pass.length > 15)
+        //         return console.log(
+        //             pass + " Password is too lengthy"
+        //         );
+        //     else if (pass.length < 8)
+        //         return console.log(
+        //             pass + " Password is too short"
+        //         );
+
+        //     let regex =
+        //         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!^%*?&]{8,15}$/;
+        //     if (regex.test(pass)) {
+        //         return console.log(pass
+        //             + " Password is strong");
+        //     }
+        //     let count = 0;
+        //     let regex1 = /[a-z]/;
+        //     if (regex1.test(pass)) count++;
+        //     let regex2 = /[A-Z]/;
+        //     if (regex2.test(pass)) count++;
+        //     let regex3 = /[\d]/;
+        //     if (regex3.test(pass)) count++;
+        //     let regex4 = /[!@#$%^&*.?]/;
+        //     if (regex4.test(pass)) count++;
+
+        //     console.log(pass, "Pasword is " + strength[count]);
+        // }
+
+
+
+
+
+
+
+
+        let Validate_cpassword = () => {
+            let c_password = document.getElementById("c_password").value;
+            let password = document.getElementById("password").value;
+            if (c_password == password) {
+            }
+            else {
+                document.getElementById("c_password_span").style.display = "inline";
+            }
+        }
+
+        let Validate_email = () => {
+            let email = document.getElementById("uemail").value;
+            console.log(email)
+            let arr = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com"];
+
+            for (var i = 0; i < email.length; i++) {
+                if (email[i] == "@") {
+                    // console.log(i)
+                    var new_email = email.split(email[i])
+                    var d = new_email[1]
+
+
+                    //  &&  (new_email[0][0] >="a" && new_email[0][0] >="z")
+
+                    for (var k = 0; k < new_email[0].length; k++) {
+                        if (((new_email[0][k] >= "a" && new_email[0][k] <= "z") || (new_email[0][k] >= "0" && new_email[0][k] <= "9") && (new_email[0][k] != " ") && (new_email[0][k] != "!" || new_email[0][k] != "#" || new_email[0][k] != "$" || new_email[0][k] != "%" || new_email[0][k] != "^" || new_email[0][k] != "&" || new_email[0][k] != "*")) && (new_email[0][0] >="a" && new_email[0][0] <="z")) {
+
+
+                        }
+                        else {
+
+                            document.getElementById("uemail_span").style.display = "inline";
+                        }
+                    }
+                    let t;
+                    for (let el in arr) {
+                         t = 0;
+                        if (arr[el] === d) {
+                            t++;
+                            break;
+                        }
+                    }
+                    if (t == 0) {
+                        document.getElementById("uemail_span").style.display = "inline";
+                    }
+                
+                }
+            }
+
+
+
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
+
+
+<!-- 
+for (i = 0; i < uname.length; i++) {
+    if (pass[i] == "!" || pass[i] == "@" || pass[i] == "&" || pass[i] == "$" || pass[i] == "^" || pass[i] == "%" || pass[i] == "*" || pass[i] == "#") {
+        console.log("Special Character Found ")
+    }
+    else {
+        console.log("Special Character Missing");
+        // document.getElementById("uname_span").style.display = "inline";
+    }
+} -->
